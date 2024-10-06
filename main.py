@@ -61,7 +61,7 @@ def create_map():
     row = random.randrange(0,9)
     col = random.randrange(0,9)
     location = [col * 64 + 32,row * 64 + 32 + 640]
-    if not(location in locations):
+    if (location not in locations):
       locations.append(location)
       type = random.choice(['tree','flag'])
       img = 'skier_tree.png' if type == 'tree' else 'skier_flag.png'
@@ -82,6 +82,7 @@ def end_game():
   sc.blit(end_text, [320, 320])
   pg.display.flip()
   pg.time.delay(3000)
+  global running
   running = False
 
 skier = SkierClass()
@@ -97,7 +98,7 @@ points = 0
 font = pg.font.Font(None, 50)
 while running:
   clock.tick(30)
-  point_text = font.render('Points - ' + str(points), 1, (0, 0, 0))
+  point_text = font.render('Points: ' + str(points), 1, (0, 0, 0))
   for i in pg.event.get():
     if i.type == pg.QUIT:
       running = False
